@@ -1,36 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plant Disease Detection</title>
+    <title>Plant Disease Prediction</title>
 </head>
 <body>
-    <h1>Plant Disease Detection</h1>
+    <h1>Plant Disease Prediction</h1>
     <form action="/predict" method="POST" enctype="multipart/form-data">
-        <input type="file" name="file" accept="image/*" required>
+        <input type="file" name="file" accept=".jpg, .jpeg, .png">
         <input type="submit" value="Predict">
     </form>
-    <div id="result"></div>
-    <script>
-        document.querySelector('form').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const formData = new FormData(e.target);
 
-            try {
-                const response = await fetch('/predict', {
-                    method: 'POST',
-                    body: formData,
-                });
-                const data = await response.json();
+    <div id="result">
+        <!-- Predicted Disease and Remedy will be displayed here -->
+    </div>
+
+    <script>
+        document.querySelector('form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            var formData = new FormData(this);
+
+            fetch('/predict', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                var resultDiv = document.getElementById('result');
                 if (data.error) {
-                    alert(data.error);
+                    resultDiv.innerHTML = '<p>Error: ' + data.error + '</p>';
                 } else {
-                    document.getElementById('result').innerText = `Predicted Disease: ${data.result}`;
+                    resultDiv.innerHTML = '<p>Predicted Disease: ' + data.result + '</p>' +
+                                          '<p>Remedy: ' + data.remedy + '</p>';
                 }
-            } catch (error) {
-                console.error(error);
-            }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
         });
     </script>
 </body>
