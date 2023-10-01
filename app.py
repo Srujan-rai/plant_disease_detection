@@ -8,10 +8,10 @@ import numpy as np
 
 app = Flask(__name__)
 
-# Load your pre-trained model
+
 model = load_model("best_model.h5")
 
-# Define a reference dictionary for class labels
+
 data_tuple = (
     [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
     [
@@ -43,7 +43,7 @@ def index():
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    # Check if an image file was uploaded
+
     if 'file' not in request.files:
         return jsonify({'error': 'No image file uploaded'})
 
@@ -53,7 +53,7 @@ def predict():
     if file.filename == '':
         return jsonify({'error': 'No image file selected'})
 
-    # Read and preprocess the image
+
     try:
         image = Image.open(file)
         image = image.resize((256, 256))
@@ -61,7 +61,7 @@ def predict():
         img_array = preprocess_input(img_array)
         img_array = np.expand_dims(img_array, axis=0)
 
-        # Make a prediction using the loaded model
+
         prediction_index = np.argmax(model.predict(img_array))
         predicted_disease = ref[prediction_index]
 
@@ -71,4 +71,4 @@ def predict():
         return jsonify({'error': str(e)})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000)
