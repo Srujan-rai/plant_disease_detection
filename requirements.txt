@@ -1,0 +1,5 @@
+Flask
+tensorflow
+Keras
+Pillow
+numpy
