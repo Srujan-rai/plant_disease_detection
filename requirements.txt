@@ -3,3 +3,5 @@ tensorflow
 Keras
 Pillow
 numpy
+from keras.applications.vgg19 import preprocess_input
+img_to_array
