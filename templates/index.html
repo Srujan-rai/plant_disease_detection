@@ -2,17 +2,24 @@
 <html>
 <head>
     <title>Plant Disease Prediction</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-    <h1>Plant Disease Prediction</h1>
-    <form action="/predict" method="POST" enctype="multipart/form-data">
-        <input type="file" name="file" accept=".jpg, .jpeg, .png">
-        <input type="submit" value="Predict">
-    </form>
+    <header>
+        <h1>Plant Disease Prediction</h1>
+    </header>
+    <main>
+        <div class="container">
+            <form action="/predict" method="POST" enctype="multipart/form-data">
+                <input type="file" name="file" accept=".jpg, .jpeg, .png">
+                <button type="submit">Predict</button>
+            </form>
 
-    <div id="result">
-        <!-- Predicted Disease and Remedy will be displayed here -->
-    </div>
+            <div id="result" class="result-container">
+                <!-- Predicted Disease and Remedy will be displayed here -->
+            </div>
+        </div>
+    </main>
 
     <script>
         document.querySelector('form').addEventListener('submit', function (e) {
