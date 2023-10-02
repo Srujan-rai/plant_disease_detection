@@ -1,10 +1,11 @@
 from flask import Flask, render_template, request, jsonify
 from keras.models import load_model
 from keras.applications.vgg19 import preprocess_input
-from keras.preprocessing.image import img_to_array
+
 from PIL import Image
 import numpy as np
 import json
+from tensorflow.keras.utils import img_to_array
 
 app = Flask(__name__)
 
