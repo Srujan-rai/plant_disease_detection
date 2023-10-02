@@ -3,3 +3,4 @@ tensorflow
 Keras
 Pillow
 numpy
+flask_restful
