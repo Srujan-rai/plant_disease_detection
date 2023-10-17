@@ -29,5 +29,5 @@ You can install the required packages using `pip`:
 ```bash
 pip install tensorflow flask flask-restful
 pip install keras
-pip instakk flask
+pip instakk flask,requests
 
